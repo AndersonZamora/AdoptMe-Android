@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1076195084977",
+    "project_id": "adopta-una-mascota-c3436",
+    "storage_bucket": "adopta-una-mascota-c3436.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076195084977:android:059c64cbb3f4646f913090",
+        "android_client_info": {
+          "package_name": "com.example.adopt_pet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076195084977-t1q3uc1c2f31pgg2lr5qdli4ipse3m22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdirlhFg_PBwyVZFkHi18r1JFbR5HHS4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076195084977-t1q3uc1c2f31pgg2lr5qdli4ipse3m22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
