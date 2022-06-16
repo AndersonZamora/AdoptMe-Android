@@ -218,6 +218,31 @@
                 android:textColor="#181918"
                 android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/mensajeEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descripcionT"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="En proceso de adopción, sigue buscando a ese compañero que alegrara tu vida"
+                android:textColor="#2689F1"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/mensajeEstadoPen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/descripcionT"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Tu solicitud de adopción esta en proceso"
+                android:textColor="#2689F1"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/sendSolicitud"
                 android:layout_width="match_parent"

@@ -18,6 +18,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".vistaAdministrador.DetalleSolicitudActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeLogin" />
+        <activity
+            android:name=".vistaAdministrador.SolicitudesAdminActivity"
+            android:exported="false"
+            android:theme="@style/AppThemeLogin" />
+        <activity
             android:name=".vistaUsuario.mascotaDetalleActivity"
             android:exported="false"
             android:theme="@style/AppThemeLogin" />

@@ -8,7 +8,7 @@ public class constants {
     public static final String TYPE_MESSAGE = "TYPE_MESSAGE";
     public static final String DESCRIPTION_MESSAGE = "DESCRIPTION_MESSAGE";
     public static final String UID = "UID";
-    public static final String REMOVE_FRAGMENT = "REMOVE_FRAGMENT";
+    public static final String SOLOCITUD_USUARIO = "SOLICITUD";
     public static final int CODE_GALLERY = 105;
 
     //ROL

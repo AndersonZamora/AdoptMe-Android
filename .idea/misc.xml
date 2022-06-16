@@ -9,11 +9,13 @@
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_admin_view.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_deactivated_user.xml" value="0.20380434782608695" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_detalle_publicaciones.xml" value="0.1" />
+        <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_detalle_solicitud.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_mascota_detalle.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_perfil_admin.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_publicaciones_admin.xml" value="0.22" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_restablecimiento.xml" value="0.33" />
+        <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_solicitudes_admin.xml" value="0.203125" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_users_screen.xml" value="0.25" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_validar_rol.xml" value="0.20416666666666666" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/activity_vista_iniciar_sesion.xml" value="0.25" />
@@ -22,7 +24,10 @@
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/fragment_gato.xml" value="0.12409420289855072" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/fragment_perro.xml" value="0.1875" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/fragment_publicacion.xml" value="0.25" />
+        <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/fragment_solicitud.xml" value="0.22" />
+        <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/fragment_solicitud2.xml" value="0.18795289855072464" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/item_row_publication.xml" value="0.33" />
+        <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/item_row_solicitud.xml" value="0.33" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/show_message.xml" value="0.1897644927536232" />
         <entry key="..\:/CinCout/Trabajos/JoseHuaman/app/src/main/res/layout/show_progress.xml" value="0.1897644927536232" />
       </map>

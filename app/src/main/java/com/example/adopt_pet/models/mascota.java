@@ -13,9 +13,18 @@ public class mascota extends Model{
     String foto;
     String path;
     boolean state;
+    String  adopcion;
 
     public mascota() {
         // Constructor requerido
+    }
+
+    public String getAdopcion() {
+        return adopcion;
+    }
+
+    public void setAdopcion(String adopcion) {
+        this.adopcion = adopcion;
     }
 
     public boolean isState() {

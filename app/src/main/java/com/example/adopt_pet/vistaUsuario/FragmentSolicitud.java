@@ -2,65 +2,146 @@ package com.example.adopt_pet.vistaUsuario;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.ablanco.zoomy.Zoomy;
 import com.example.adopt_pet.R;
+import com.example.adopt_pet.autenticacion.validarRolActivity;
+import com.example.adopt_pet.ayudantes.constants;
+import com.example.adopt_pet.ayudantes.preferenceManager;
+import com.example.adopt_pet.models.solicitud;
+import com.example.adopt_pet.models.usuario;
+import com.example.adopt_pet.mostrarMensajes.MessageShow;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSolicitud#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Objects;
+
+
 public class FragmentSolicitud extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FirebaseFirestore db;
+    FirebaseUser user;
+    DocumentReference docRef;
+    String uid;
+    MessageShow messageShow;
+    preferenceManager manager;
+    TextView nameS;
+    TextView razaS;
+    TextView tipoS;
+    TextView estadoT;
+    TextView estadoS;
+    ImageView image_mascota;
+    Zoomy.Builder builder;
+    Button cancelar;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    //recycler_solicitud
     public FragmentSolicitud() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSolicitud.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentSolicitud newInstance(String param1, String param2) {
-        FragmentSolicitud fragment = new FragmentSolicitud();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_solicitud, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init(view);
+        getSolicitud();
+
+        builder.target(image_mascota)
+                .animateZooming(false)
+                .enableImmersiveMode(false);
+        builder.register();
+
+    }
+
+    private void getSolicitud() {
+
+        messageShow.showProgress();
+
+        docRef.addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                messageShow.dismissProgress();
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                solicitud sol = snapshot.toObject(solicitud.class);
+                assert sol != null;
+                manager.putString(constants.SOLOCITUD_USUARIO, sol.getEstado());
+                setData(sol);
+                messageShow.dismissProgress();
+            }
+        });
+    }
+
+    void setData(solicitud sol) {
+
+        if (sol != null) {
+            nameS.setText(sol.getNombreMascota());
+            razaS.setText(sol.getRazaMascota());
+            tipoS.setText(sol.getTipoMascota());
+            estadoT.setText(sol.getInfo());
+            estadoS.setText(sol.getEstado());
+
+            if (sol.getFoto() != null && !Objects.equals(sol.getFoto(), "")) {
+                Picasso.get()
+                        .load(sol.getFoto())
+                        .placeholder(R.color.black)
+                        .error(R.color.purple_200)
+                        .into(image_mascota, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                image_mascota.setVisibility(View.VISIBLE);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+                                image_mascota.setVisibility(View.VISIBLE);
+                                image_mascota.setImageResource(R.drawable.portada);
+                            }
+                        });
+            }
+        }
+    }
+
+    void init(@NonNull View view) {
+        manager = new preferenceManager(requireActivity());
+        messageShow = new MessageShow(requireActivity().getSupportFragmentManager());
+        messageShow.init();
+        builder = new Zoomy.Builder(requireActivity());
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        uid = user.getUid();
+        db = FirebaseFirestore.getInstance();
+        docRef = db.collection("Solicitudes").document(uid);
+        nameS = view.findViewById(R.id.nameS);
+        razaS = view.findViewById(R.id.razaS);
+        tipoS = view.findViewById(R.id.tipoS);
+        estadoT = view.findViewById(R.id.estadoT);
+        estadoS = view.findViewById(R.id.estadoS);
+        image_mascota = view.findViewById(R.id.image_mascota);
     }
 }

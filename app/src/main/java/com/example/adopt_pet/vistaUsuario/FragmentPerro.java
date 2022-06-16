@@ -1,5 +1,6 @@
 package com.example.adopt_pet.vistaUsuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -96,6 +97,8 @@ public class FragmentPerro extends Fragment implements receiveId {
 
     @Override
     public void receivePublication(String id) {
-
+        Intent intent = new Intent(requireActivity(), mascotaDetalleActivity.class);
+        intent.putExtra("uid", id);
+        startActivity(intent);
     }
 }

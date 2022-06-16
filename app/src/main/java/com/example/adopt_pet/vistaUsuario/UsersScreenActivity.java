@@ -6,21 +6,70 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.adopt_pet.Adapter.AdapterPublication;
 import com.example.adopt_pet.Adapter.viewPagerAdapter;
 import com.example.adopt_pet.R;
+import com.example.adopt_pet.models.mascota;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersScreenActivity extends AppCompatActivity {
+
+    FirebaseFirestore db;
+    TextView numberS;
+    TextView numberF;
+    int cont = 0;
+    int contS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_screen);
-
+        init();
+        tamanioPublicaciones();
+        tamanioAdopciones();
         viewPager();
+    }
+
+    void init() {
+        db = FirebaseFirestore.getInstance();
+        numberS = findViewById(R.id.numberS);
+        numberF = findViewById(R.id.numberF);
+    }
+
+    void tamanioPublicaciones() {
+
+        db.collection("Publicaciones")
+                .addSnapshotListener((value, error) -> {
+                    assert value != null;
+                    for (QueryDocumentSnapshot doc : value) {
+                        Log.e("da", doc.getId());
+                        cont = cont + 1;
+                    }
+                    numberS.setText(String.valueOf(cont));
+                });
+    }
+
+    void tamanioAdopciones() {
+        db.collection("Adopciones")
+                .addSnapshotListener((value, error) -> {
+                    assert value != null;
+                    for (QueryDocumentSnapshot doc : value) {
+                        Log.e("da", doc.getId());
+                        contS = contS + 1;
+                    }
+                    numberF.setText(String.valueOf(contS));
+                });
     }
 
     void viewPager() {

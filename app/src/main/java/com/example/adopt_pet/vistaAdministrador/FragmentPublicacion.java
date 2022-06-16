@@ -163,6 +163,7 @@ public class FragmentPublicacion extends Fragment {
         setPublication.put("foto", urlImage);
         setPublication.put("path", "adopt/" + path);
         setPublication.put("state",true);
+        setPublication.put("adopcion","no");
         return setPublication;
     }
 }

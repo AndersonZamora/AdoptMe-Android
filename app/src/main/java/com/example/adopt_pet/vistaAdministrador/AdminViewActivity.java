@@ -18,7 +18,9 @@ public class AdminViewActivity extends AppCompatActivity {
 
         ImageView publications_img = findViewById(R.id.publications_img);
         ImageView sign_off_img = findViewById(R.id.sign_off_img);
+        ImageView requests_img = findViewById(R.id.requests_img);
         publications_img.setOnClickListener(view -> startActivity(new Intent(AdminViewActivity.this, PublicacionesAdminActivity.class)));
         sign_off_img.setOnClickListener(view -> startActivity(new Intent(AdminViewActivity.this, PerfilAdminActivity.class)));
+        requests_img.setOnClickListener(view -> startActivity(new Intent(AdminViewActivity.this, SolicitudesAdminActivity.class)));
     }
 }

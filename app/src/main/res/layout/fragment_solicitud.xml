@@ -1,14 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vistaUsuario.FragmentSolicitud">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="Mi solicitud"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <ImageView
+                android:id="@+id/image_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/estadoT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image_mascota"
+                android:background="#36B63B"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/estadoT"
+                android:layout_margin="10dp"
+                android:stretchColumns="1">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="0"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:text="Nombre:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nameS"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:textColor="#2689F1"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="0"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:text="Raza:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/razaS"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:textColor="#2689F1"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="0"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:text="Tipo:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tipoS"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:textColor="#2689F1"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_column="0"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:text="Estado:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/estadoS"
+                        android:layout_margin="5dp"
+                        android:padding="3dip"
+                        android:textColor="#2689F1"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/cancelar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Cancelar Solicitud" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

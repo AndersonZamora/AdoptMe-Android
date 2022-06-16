@@ -26,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -48,6 +50,8 @@ public class mascotaDetalleActivity extends AppCompatActivity {
     TextView edadT;
     TextView fechaT;
     TextView contactoT;
+    TextView mensajeEstado;
+    TextView mensajeEstadoPen;
     ImageView whatsapp;
     ImageView llamada;
     Button sendSolicitud;
@@ -98,18 +102,19 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         String nombreUsuario = manager.getString(constants.NOMBRE_USUARIO);
         String numeroUsuario = manager.getString(constants.NUMERO_USUARIO);
         String usuarioID = manager.getString(constants.UID);
-        String nombreMascota = data.getNombre();
-        String razaMascota = data.getRaza();
-        String tipoMascota = data.getTipo();
 
         Map<String, Object> map = new HashMap<>();
         map.put("nombreUsuario", nombreUsuario);
         map.put("numeroUsuario", numeroUsuario);
         map.put("usuarioID", usuarioID);
-        map.put("nombreMascota", nombreMascota);
-        map.put("razaMascota", razaMascota);
-        map.put("tipoMascota", tipoMascota);
+        map.put("nombreMascota", data.getNombre());
+        map.put("razaMascota", data.getRaza());
+        map.put("tipoMascota", data.getTipo());
         map.put("mascotaID", uid);
+        map.put("estado", "Pendiente");
+        map.put("foto", data.getFoto());
+        map.put("info", data.getEstado());
+        map.put("fecha", DateFormat.getDateInstance().format(new Date()));
 
         db.collection("Solicitudes").document(usuarioID)
                 .set(map)
@@ -169,6 +174,17 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         edadT.setText(data.getEdad());
         fechaT.setText(data.getFechaPublication());
         contactoT.setText(data.getContacto());
+
+        String soli = manager.getString(constants.SOLOCITUD_USUARIO);
+
+        if (data.getAdopcion().equals("Aprodado")) {
+            sendSolicitud.setVisibility(View.GONE);
+            mensajeEstado.setVisibility(View.VISIBLE);
+        } else if (soli != null && !soli.equals("")) {
+            sendSolicitud.setVisibility(View.GONE);
+            mensajeEstadoPen.setVisibility(View.VISIBLE);
+        }
+
         messageShow.dismissProgress();
     }
 
@@ -194,5 +210,7 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         whatsapp = findViewById(R.id.whatsapp);
         llamada = findViewById(R.id.llamada);
         sendSolicitud = findViewById(R.id.sendSolicitud);
+        mensajeEstado = findViewById(R.id.mensajeEstado);
+        mensajeEstadoPen = findViewById(R.id.mensajeEstadoPen);
     }
 }
