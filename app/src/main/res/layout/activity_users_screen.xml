@@ -22,7 +22,7 @@
                 android:id="@+id/panelLayout"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/teal_700"
+                android:background="@color/app_color"
                 android:orientation="horizontal"
                 android:weightSum="16"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -109,8 +109,8 @@
                             android:layout_height="wrap_content"
                             android:textColor="#CF0808"
                             android:textSize="20sp" />
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 

@@ -14,7 +14,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal_700"
+            android:background="@color/app_color"
             android:gravity="center_horizontal"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
                             android:id="@+id/nameS"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:textColor="#2689F1"
+                            android:textColor="@color/app_color"
                             android:textSize="18sp" />
                     </TableRow>
 
@@ -99,7 +99,7 @@
                             android:id="@+id/razaS"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:textColor="#2689F1"
+                            android:textColor="@color/app_color"
                             android:textSize="18sp" />
                     </TableRow>
 
@@ -118,7 +118,7 @@
                             android:id="@+id/tipoS"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:textColor="#2689F1"
+                            android:textColor="@color/app_color"
                             android:textSize="18sp" />
                     </TableRow>
 
@@ -155,7 +155,7 @@
                             android:id="@+id/nameU"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:textColor="#2689F1"
+                            android:textColor="@color/app_color"
                             android:textSize="18sp" />
                     </TableRow>
 
@@ -174,7 +174,7 @@
                             android:id="@+id/nuemroU"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:textColor="#2689F1"
+                            android:textColor="@color/app_color"
                             android:textSize="18sp" />
 
                     </TableRow>
@@ -240,16 +240,16 @@
                 <Button
                     android:id="@+id/adopcion"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
                     android:text="Mandar a casa"
                     android:textColor="#fff"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>

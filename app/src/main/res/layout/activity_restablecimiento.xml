@@ -63,8 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
-                android:visibility="visible"
-                android:hint="@string/email">
+                android:hint="@string/email"
+                android:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -80,31 +80,32 @@
                 android:id="@+id/recuperar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:text="Restablecer Contraseña"
                 android:textAllCaps="true"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/mensaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:visibility="gone"
                 android:gravity="center"
                 android:text="En breve recibirás una email con las indicaciones para cambiar tu contraseña"
                 android:textColor="#494747"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/progress_recuperar"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

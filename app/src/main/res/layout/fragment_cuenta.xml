@@ -15,20 +15,20 @@
     <TextView
         android:id="@+id/acot"
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:text="Mi Cuenta"/>
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="Mi Cuenta"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nombreP"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_below="@+id/acot"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/acot"
         android:layout_margin="10dp"
         android:hint="Nombres">
 
@@ -112,7 +112,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/teal_700"
         android:text="Cerrar sesión"
         android:textAlignment="center"
         android:textAllCaps="true"

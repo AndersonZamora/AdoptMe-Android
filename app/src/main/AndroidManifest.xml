@@ -20,66 +20,82 @@
         <activity
             android:name=".DetalleAdopcionActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.AdoptadosAdminActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.DetalleSolicitudActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.SolicitudesAdminActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaUsuario.mascotaDetalleActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".autenticacion.RestablecimientoActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.PerfilAdminActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.DetallePublicacionesActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.PublicacionesAdminActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".DeactivatedUserActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaAdministrador.AdminViewActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".vistaUsuario.UsersScreenActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".autenticacion.validarRolActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".autenticacion.VistaRegistrarseActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".autenticacion.VistaIniciarSesionActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
