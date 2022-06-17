@@ -17,18 +17,20 @@ import com.example.adopt_pet.ayudantes.constants;
 import com.example.adopt_pet.ayudantes.preferenceManager;
 import com.example.adopt_pet.models.solicitud;
 import com.example.adopt_pet.mostrarMensajes.MessageShow;
-import com.example.adopt_pet.vistaUsuario.mascotaDetalleActivity;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class DetalleSolicitudActivity extends AppCompatActivity {
 
-    TextView verFicha;
     TextView nameS;
+    TextView mensajeS;
     TextView razaS;
     TextView tipoS;
     TextView nameU;
@@ -38,7 +40,7 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
     ImageView llamada;
     Button rechazar;
     Button aprobar;
-
+    Button adopcion;
     FirebaseFirestore db;
     DocumentReference docRef;
     String uid;
@@ -52,12 +54,11 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalle_solicitud);
 
         uid = getIntent().getStringExtra("uid");
-
         init();
         getSolicitud();
 
         whatsapp.setOnClickListener(view -> {
-            String url = "https://api.whatsapp.com/send?phone=" + sol.getNumeroUsuario() + "&text=" + sol.getNombreUsuario();
+            String url = "https://api.whatsapp.com/send?phone=" + "+51" + sol.getNumeroUsuario() + "&text=" + sol.getNombreUsuario();
             try {
                 PackageManager pm = getPackageManager();
                 pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
@@ -78,7 +79,60 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
                 Toast.makeText(DetalleSolicitudActivity.this, "La aplicación teléfono no está instalada en su celular", Toast.LENGTH_SHORT).show();
             }
         });
+        rechazar.setOnClickListener(view -> updateSolicitud("Rechazada"));
+        aprobar.setOnClickListener(view -> updateSolicitud("Aprobada"));
+        adopcion.setOnClickListener(view -> adoptar());
+    }
 
+    void adoptar() {
+
+        messageShow.showProgress();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("nombre", sol.getNombreMascota());
+        map.put("foto", sol.getFoto());
+        map.put("info", "Encontró un hogar");
+        map.put("fecha", DateFormat.getDateInstance().format(new Date()));
+        map.put("solicitante", sol.getNombreUsuario());
+        map.put("numero", sol.getNumeroUsuario());
+
+        db.collection("Adopciones")
+                .add(map)
+                .addOnSuccessListener(aVoid -> {
+                    db.collection("Publicaciones").document(sol.getMascotaID())
+                            .delete()
+                            .addOnSuccessListener(aVoiddd -> {
+                                db.collection("Solicitudes").document(sol.getUsuarioID())
+                                        .delete()
+                                        .addOnSuccessListener(aVoidd -> {
+                                            messageShow.dismissProgress();
+                                            Toast.makeText(DetalleSolicitudActivity.this, "Adoptado", Toast.LENGTH_SHORT).show();
+                                            onBackPressed();
+                                        });
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(DetalleSolicitudActivity.this, "No Adoptado", Toast.LENGTH_SHORT).show();
+                    messageShow.showMessageV(e.getMessage());
+                    messageShow.dismissProgress();
+                });
+    }
+
+
+    void updateSolicitud(String tipo) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("estado", tipo);
+        messageShow.showProgress();
+        db.collection("Solicitudes").document(uid)
+                .update(map).addOnSuccessListener(unused -> {
+                    messageShow.dismissProgress();
+                    Toast.makeText(DetalleSolicitudActivity.this, "Solicitud " + tipo, Toast.LENGTH_SHORT).show();
+                    messageShow.dismissProgress();
+                    onBackPressed();
+                }).addOnFailureListener(e -> {
+                    messageShow.dismissProgress();
+                    Toast.makeText(DetalleSolicitudActivity.this, "Error al " + tipo + " solicitud ", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void getSolicitud() {
@@ -128,20 +182,33 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
                             }
                         });
             }
+
+            if (sol.getEstado().equals("Rechazada")) {
+                aprobar.setVisibility(View.VISIBLE);
+                rechazar.setVisibility(View.GONE);
+                mensajeS.setVisibility(View.GONE);
+                adopcion.setVisibility(View.GONE);
+            } else if (sol.getEstado().equals("Aprobada")) {
+                rechazar.setVisibility(View.GONE);
+                aprobar.setVisibility(View.GONE);
+                mensajeS.setVisibility(View.VISIBLE);
+                adopcion.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     void init() {
-        verFicha = findViewById(R.id.verFicha);
         nameS = findViewById(R.id.nameS);
         razaS = findViewById(R.id.razaS);
         tipoS = findViewById(R.id.tipoS);
+        mensajeS = findViewById(R.id.mensajeS);
         nameU = findViewById(R.id.nameU);
         nuemroU = findViewById(R.id.nuemroU);
         whatsapp = findViewById(R.id.whatsapp);
         llamada = findViewById(R.id.llamada);
         rechazar = findViewById(R.id.rechazar);
         aprobar = findViewById(R.id.aprobar);
+        adopcion = findViewById(R.id.adopcion);
         publication_image_s = findViewById(R.id.publication_image_s);
 
         manager = new preferenceManager(DetalleSolicitudActivity.this);
@@ -149,8 +216,12 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
         messageShow.init();
         db = FirebaseFirestore.getInstance();
 
-        if (uid != null && !uid.equals("")) {
-            docRef = db.collection("Solicitudes").document(uid);
+        try {
+            if (uid != null && !uid.equals("")) {
+                docRef = db.collection("Solicitudes").document(uid);
+            }
+        } catch (Exception e) {
+            onBackPressed();
         }
     }
 }

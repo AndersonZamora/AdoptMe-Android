@@ -52,6 +52,7 @@ public class UsersScreenActivity extends AppCompatActivity {
         db.collection("Publicaciones")
                 .addSnapshotListener((value, error) -> {
                     assert value != null;
+                    cont = 0;
                     for (QueryDocumentSnapshot doc : value) {
                         Log.e("da", doc.getId());
                         cont = cont + 1;
@@ -64,6 +65,7 @@ public class UsersScreenActivity extends AppCompatActivity {
         db.collection("Adopciones")
                 .addSnapshotListener((value, error) -> {
                     assert value != null;
+                    contS = 0;
                     for (QueryDocumentSnapshot doc : value) {
                         Log.e("da", doc.getId());
                         contS = contS + 1;
@@ -79,6 +81,7 @@ public class UsersScreenActivity extends AppCompatActivity {
         viewPagerAdapter mPagerAdapter = new viewPagerAdapter(getSupportFragmentManager(), getLifecycle());
         mPagerAdapter.addFragment(new FragmentGato());
         mPagerAdapter.addFragment(new FragmentPerro());
+        mPagerAdapter.addFragment(new FragmentAdopciones());
         mPagerAdapter.addFragment(new FragmentSolicitud());
         mPagerAdapter.addFragment(new FragmentCuenta());
 
@@ -106,9 +109,12 @@ public class UsersScreenActivity extends AppCompatActivity {
                     tab.setIcon(R.drawable.labrador);
                     break;
                 case 2:
-                    tab.setIcon(R.drawable.solicitud);
+                    tab.setIcon(R.drawable.gatito);
                     break;
                 case 3:
+                    tab.setIcon(R.drawable.solicitud);
+                    break;
+                case 4:
                     tab.setIcon(R.drawable.usuario);
                     break;
             }

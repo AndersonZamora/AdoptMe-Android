@@ -122,7 +122,6 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
     }
 
     void setData() {
-
         Objects.requireNonNull(nombreD.getEditText()).setText(data.getNombre());
         Objects.requireNonNull(razaD.getEditText()).setText(data.getRaza());
         Objects.requireNonNull(edadD.getEditText()).setText(data.getEdad());

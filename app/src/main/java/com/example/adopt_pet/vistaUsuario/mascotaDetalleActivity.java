@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.ablanco.zoomy.Zoomy;
 import com.example.adopt_pet.R;
-import com.example.adopt_pet.autenticacion.VistaRegistrarseActivity;
-import com.example.adopt_pet.autenticacion.validarRolActivity;
 import com.example.adopt_pet.ayudantes.constants;
 import com.example.adopt_pet.ayudantes.preferenceManager;
 import com.example.adopt_pet.ayudantes.validaciones;
@@ -72,7 +70,7 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         builder.register();
 
         whatsapp.setOnClickListener(view -> {
-            String url = "https://api.whatsapp.com/send?phone=" + data.getContacto() + "&text=" + data.getNombre();
+            String url = "https://api.whatsapp.com/send?phone=" + "+51" + data.getContacto() + "&text=" + data.getNombre();
             try {
                 PackageManager pm = getPackageManager();
                 pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);

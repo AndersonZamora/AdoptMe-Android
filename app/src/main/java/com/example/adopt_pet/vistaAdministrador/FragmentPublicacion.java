@@ -85,7 +85,6 @@ public class FragmentPublicacion extends Fragment {
     }
 
     void uploadPhoto(Uri uri) {
-
         show.showProgress();
         String name = System.currentTimeMillis() + ".jpg";
         StorageReference upload = FirebaseStorage.getInstance().getReference().child("adopt/" + name);

@@ -11,16 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ablanco.zoomy.Zoomy;
 import com.example.adopt_pet.R;
-import com.example.adopt_pet.autenticacion.validarRolActivity;
 import com.example.adopt_pet.ayudantes.constants;
 import com.example.adopt_pet.ayudantes.preferenceManager;
 import com.example.adopt_pet.models.solicitud;
-import com.example.adopt_pet.models.usuario;
 import com.example.adopt_pet.mostrarMensajes.MessageShow;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +30,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
-
 
 public class FragmentSolicitud extends Fragment {
 
@@ -45,11 +44,15 @@ public class FragmentSolicitud extends Fragment {
     TextView tipoS;
     TextView estadoT;
     TextView estadoS;
+    TextView mensajeAp;
+    TextView mensajeEl;
     ImageView image_mascota;
     Zoomy.Builder builder;
     Button cancelar;
+    Button eliminar;
+    solicitud sol;
+    LinearLayout linearLayout3;
 
-    //recycler_solicitud
     public FragmentSolicitud() {
         // Required empty public constructor
     }
@@ -76,6 +79,27 @@ public class FragmentSolicitud extends Fragment {
                 .enableImmersiveMode(false);
         builder.register();
 
+        eliminar.setOnClickListener(view1 -> eliminarSolicitud());
+        cancelar.setOnClickListener(view1 -> eliminarSolicitud());
+    }
+
+    void eliminarSolicitud() {
+
+        if (sol != null) {
+            messageShow.showProgress();
+            db.collection("Solicitudes").document(sol.getUsuarioID())
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        messageShow.dismissProgress();
+                        linearLayout3.setVisibility(View.GONE);
+                        manager.putString(constants.SOLOCITUD_USUARIO, "");
+                        Toast.makeText(requireActivity(), "Eliminado con éxito!", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        messageShow.dismissProgress();
+                        Toast.makeText(requireActivity(), "Error al eliminar la solicitud", Toast.LENGTH_SHORT).show();
+                    });
+        }
     }
 
     private void getSolicitud() {
@@ -84,20 +108,26 @@ public class FragmentSolicitud extends Fragment {
 
         docRef.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
+                linearLayout3.setVisibility(View.GONE);
                 messageShow.dismissProgress();
             }
 
             if (snapshot != null && snapshot.exists()) {
-                solicitud sol = snapshot.toObject(solicitud.class);
+                sol = snapshot.toObject(solicitud.class);
                 assert sol != null;
                 manager.putString(constants.SOLOCITUD_USUARIO, sol.getEstado());
-                setData(sol);
+                setData();
                 messageShow.dismissProgress();
+                linearLayout3.setVisibility(View.VISIBLE);
+            } else {
+                manager.putString(constants.SOLOCITUD_USUARIO, "");
+                messageShow.dismissProgress();
+                linearLayout3.setVisibility(View.GONE);
             }
         });
     }
 
-    void setData(solicitud sol) {
+    void setData() {
 
         if (sol != null) {
             nameS.setText(sol.getNombreMascota());
@@ -105,6 +135,24 @@ public class FragmentSolicitud extends Fragment {
             tipoS.setText(sol.getTipoMascota());
             estadoT.setText(sol.getInfo());
             estadoS.setText(sol.getEstado());
+
+            switch (sol.getEstado()) {
+                case "Aprobada":
+                    mensajeAp.setVisibility(View.VISIBLE);
+                    cancelar.setVisibility(View.GONE);
+                    break;
+                case "Rechazada":
+                    cancelar.setVisibility(View.GONE);
+                    mensajeEl.setVisibility(View.VISIBLE);
+                    eliminar.setVisibility(View.VISIBLE);
+                    break;
+                case "Pendiente":
+                    mensajeEl.setVisibility(View.GONE);
+                    mensajeAp.setVisibility(View.GONE);
+                    eliminar.setVisibility(View.GONE);
+                    cancelar.setVisibility(View.VISIBLE);
+                    break;
+            }
 
             if (sol.getFoto() != null && !Objects.equals(sol.getFoto(), "")) {
                 Picasso.get()
@@ -124,6 +172,9 @@ public class FragmentSolicitud extends Fragment {
                             }
                         });
             }
+            linearLayout3.setVisibility(View.VISIBLE);
+        } else {
+            linearLayout3.setVisibility(View.GONE);
         }
     }
 
@@ -142,6 +193,11 @@ public class FragmentSolicitud extends Fragment {
         tipoS = view.findViewById(R.id.tipoS);
         estadoT = view.findViewById(R.id.estadoT);
         estadoS = view.findViewById(R.id.estadoS);
+        mensajeAp = view.findViewById(R.id.mensajeAp);
+        cancelar = view.findViewById(R.id.cancelar);
+        mensajeEl = view.findViewById(R.id.mensajeEl);
+        eliminar = view.findViewById(R.id.eliminar);
         image_mascota = view.findViewById(R.id.image_mascota);
+        linearLayout3 = view.findViewById(R.id.linearLayout3);
     }
 }

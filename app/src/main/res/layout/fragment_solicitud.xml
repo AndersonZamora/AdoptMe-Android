@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -47,7 +48,6 @@
                 android:id="@+id/estadoT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/image_mascota"
                 android:background="#36B63B"
                 android:gravity="center"
                 android:padding="5dp"
@@ -145,12 +145,45 @@
 
             </TableLayout>
 
+            <TextView
+                android:id="@+id/mensajeAp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Tu solicitud ha sido aprobada, muy pronto contactaran contigo"
+                android:textColor="#2F7A10"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/cancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="Cancelar Solicitud" />
+
+            <TextView
+                android:id="@+id/mensajeEl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Tu solicitud ha sido rechazada, elimina la solicitud para volver a enviar una nueva, no te desanimes a un puedes encontrar a ese compañero"
+                android:textColor="#ED213F"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/eliminar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="Eliminar solicitud"
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
         </LinearLayout>
 

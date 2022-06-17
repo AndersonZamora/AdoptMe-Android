@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vistaAdministrador.DetalleSolicitudActivity">
+    tools:context=".DetalleAdopcionActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -90,13 +90,13 @@
                             android:layout_column="0"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:text="Raza:"
+                            android:text="Estado:"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/razaS"
+                            android:id="@+id/estadoS"
                             android:layout_margin="5dp"
                             android:padding="3dip"
                             android:textColor="#2689F1"
@@ -109,13 +109,13 @@
                             android:layout_column="0"
                             android:layout_margin="5dp"
                             android:padding="3dip"
-                            android:text="Tipo:"
+                            android:text="Fecha:"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tipoS"
+                            android:id="@+id/fechaS"
                             android:layout_margin="5dp"
                             android:padding="3dip"
                             android:textColor="#2689F1"
@@ -129,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Solicitante"
+                    android:text="Encontro un amigo"
                     android:textColor="@color/black"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -206,44 +206,6 @@
                         android:src="@drawable/llamada" />
 
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/aprobar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="Aprobar"
-                    android:textAllCaps="true"
-                    android:textColor="#fff" />
-
-                <Button
-                    android:id="@+id/rechazar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="Rechazar"
-                    android:textAllCaps="true"
-                    android:textColor="#fff" />
-
-                <TextView
-                    android:id="@+id/mensajeS"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Solicitud Aprobada"
-                    android:textColor="#147A0B"
-                    android:textSize="21sp"
-                    android:visibility="gone" />
-
-                <Button
-                    android:id="@+id/adopcion"
-                    android:layout_width="match_parent"
-                    android:text="Mandar a casa"
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
