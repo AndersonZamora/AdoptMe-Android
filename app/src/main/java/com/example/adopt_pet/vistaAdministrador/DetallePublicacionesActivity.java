@@ -161,8 +161,6 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
         docRef.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 messageShow.dismissProgress();
-                Toast.makeText(DetallePublicacionesActivity.this, "Error al obtener publicación", Toast.LENGTH_SHORT).show();
-                onBackPressed();
             }
 
             if (snapshot != null && snapshot.exists()) {

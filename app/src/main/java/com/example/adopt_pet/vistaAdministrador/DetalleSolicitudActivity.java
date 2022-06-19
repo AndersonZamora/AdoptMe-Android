@@ -117,7 +117,6 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
                 });
     }
 
-
     void updateSolicitud(String tipo) {
 
         HashMap<String, Object> map = new HashMap<>();

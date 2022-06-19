@@ -54,7 +54,6 @@ public class PublicacionesAdminActivity extends AppCompatActivity implements rec
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(PublicacionesAdminActivity.this, "Sin publicaciones", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

@@ -45,7 +45,6 @@ public class AdoptadosAdminActivity extends AppCompatActivity implements receive
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(AdoptadosAdminActivity.this, "Sin adopciones", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

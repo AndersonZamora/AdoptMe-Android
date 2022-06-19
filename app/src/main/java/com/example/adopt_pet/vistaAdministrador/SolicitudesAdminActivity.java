@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.adopt_pet.Adapter.AdapterSolicitud;
 import com.example.adopt_pet.Adapter.receiveId;
@@ -42,7 +41,6 @@ public class SolicitudesAdminActivity extends AppCompatActivity implements recei
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(SolicitudesAdminActivity.this, "Sin solicitudes", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

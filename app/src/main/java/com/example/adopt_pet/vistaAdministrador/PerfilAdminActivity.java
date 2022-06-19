@@ -47,7 +47,6 @@ public class PerfilAdminActivity extends AppCompatActivity {
         docRef.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 progress_circular_person.setVisibility(View.GONE);
-                onBackPressed();
             }
 
             if (snapshot != null && snapshot.exists()) {
