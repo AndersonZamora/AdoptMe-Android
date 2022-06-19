@@ -133,8 +133,6 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         docRef.addSnapshotListener((snapshot, e) -> {
             if (e != null) {
                 messageShow.dismissProgress();
-                Toast.makeText(mascotaDetalleActivity.this, "Error al obtener mascota", Toast.LENGTH_SHORT).show();
-                onBackPressed();
             }
             if (snapshot != null && snapshot.exists()) {
                 data = snapshot.toObject(mascota.class);

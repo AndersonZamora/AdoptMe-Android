@@ -73,7 +73,6 @@ public class FragmentAdopciones extends Fragment implements receiveId {
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(requireActivity(), "Sin adopciones", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

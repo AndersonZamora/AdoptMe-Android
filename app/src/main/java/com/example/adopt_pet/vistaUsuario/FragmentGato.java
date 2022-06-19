@@ -62,7 +62,6 @@ public class FragmentGato extends Fragment implements receiveId {
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(requireActivity(), "Sin gatos", Toast.LENGTH_SHORT).show();
                         return;
                     }
 

@@ -9,19 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.adopt_pet.Adapter.AdapterPublication;
 import com.example.adopt_pet.Adapter.viewPagerAdapter;
 import com.example.adopt_pet.R;
-import com.example.adopt_pet.models.mascota;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsersScreenActivity extends AppCompatActivity {
 
@@ -51,31 +45,32 @@ public class UsersScreenActivity extends AppCompatActivity {
 
         db.collection("Publicaciones")
                 .addSnapshotListener((value, error) -> {
-                    assert value != null;
-                    cont = 0;
-                    for (QueryDocumentSnapshot doc : value) {
-                        Log.e("da", doc.getId());
-                        cont = cont + 1;
+                    if (value != null) {
+                        cont = 0;
+                        for (QueryDocumentSnapshot doc : value) {
+                            Log.e("da", doc.getId());
+                            cont = cont + 1;
+                        }
+                        numberS.setText(String.valueOf(cont));
                     }
-                    numberS.setText(String.valueOf(cont));
                 });
     }
 
     void tamanioAdopciones() {
         db.collection("Adopciones")
                 .addSnapshotListener((value, error) -> {
-                    assert value != null;
-                    contS = 0;
-                    for (QueryDocumentSnapshot doc : value) {
-                        Log.e("da", doc.getId());
-                        contS = contS + 1;
+                    if (value != null) {
+                        contS = 0;
+                        for (QueryDocumentSnapshot doc : value) {
+                            Log.e("da", doc.getId());
+                            contS = contS + 1;
+                        }
+                        numberF.setText(String.valueOf(contS));
                     }
-                    numberF.setText(String.valueOf(contS));
                 });
     }
 
     void viewPager() {
-
         ViewPager2 vp_horizontal = findViewById(R.id.vp_horizontal);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         viewPagerAdapter mPagerAdapter = new viewPagerAdapter(getSupportFragmentManager(), getLifecycle());

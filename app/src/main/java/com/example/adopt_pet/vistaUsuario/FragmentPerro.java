@@ -69,7 +69,6 @@ public class FragmentPerro extends Fragment implements receiveId {
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         messageShow.dismissProgress();
-                        Toast.makeText(requireActivity(), "Sin Perros", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
