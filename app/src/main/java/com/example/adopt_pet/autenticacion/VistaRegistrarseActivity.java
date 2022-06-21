@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.adopt_pet.R;
@@ -29,6 +30,7 @@ public class VistaRegistrarseActivity extends AppCompatActivity {
     TextInputLayout contrasenia1F;
     TextInputLayout contrasenia2F;
     Button registro;
+    RadioButton rbAccept;
     validaciones mValidations;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -62,6 +64,7 @@ public class VistaRegistrarseActivity extends AppCompatActivity {
             createUserWithEmailAndPassword();
 
         });
+        rbAccept.setOnClickListener(view -> registro.setEnabled(rbAccept.isChecked()));
     }
 
     void init() {
@@ -79,6 +82,7 @@ public class VistaRegistrarseActivity extends AppCompatActivity {
         contrasenia1F = findViewById(R.id.contrasenia1F);
         contrasenia2F = findViewById(R.id.contrasenia2F);
         registro = findViewById(R.id.registrar);
+        rbAccept = findViewById(R.id.rbAccept);
     }
 
     void createUserWithEmailAndPassword() {

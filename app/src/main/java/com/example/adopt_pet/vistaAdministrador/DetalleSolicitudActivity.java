@@ -17,6 +17,7 @@ import com.example.adopt_pet.ayudantes.constants;
 import com.example.adopt_pet.ayudantes.preferenceManager;
 import com.example.adopt_pet.models.solicitud;
 import com.example.adopt_pet.mostrarMensajes.MessageShow;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Callback;
@@ -124,10 +125,21 @@ public class DetalleSolicitudActivity extends AppCompatActivity {
         messageShow.showProgress();
         db.collection("Solicitudes").document(uid)
                 .update(map).addOnSuccessListener(unused -> {
-                    messageShow.dismissProgress();
-                    Toast.makeText(DetalleSolicitudActivity.this, "Solicitud " + tipo, Toast.LENGTH_SHORT).show();
-                    messageShow.dismissProgress();
-                    onBackPressed();
+                    if (tipo.equals("Aprobada")) {
+                        HashMap<String, Object> mapP = new HashMap<>();
+                        mapP.put("adopcion", "si");
+                        db.collection("Publicaciones").document(sol.getMascotaID()).update(mapP).addOnSuccessListener(unused1 -> {
+                            messageShow.dismissProgress();
+                            Toast.makeText(DetalleSolicitudActivity.this, "Solicitud " + tipo, Toast.LENGTH_SHORT).show();
+                            messageShow.dismissProgress();
+                            onBackPressed();
+                        });
+                    } else {
+                        messageShow.dismissProgress();
+                        Toast.makeText(DetalleSolicitudActivity.this, "Solicitud " + tipo, Toast.LENGTH_SHORT).show();
+                        messageShow.dismissProgress();
+                        onBackPressed();
+                    }
                 }).addOnFailureListener(e -> {
                     messageShow.dismissProgress();
                     Toast.makeText(DetalleSolicitudActivity.this, "Error al " + tipo + " solicitud ", Toast.LENGTH_SHORT).show();

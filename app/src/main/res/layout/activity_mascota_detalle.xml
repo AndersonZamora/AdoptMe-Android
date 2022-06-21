@@ -161,25 +161,6 @@
                         android:textSize="18sp" />
                 </TableRow>
 
-                <TableRow>
-
-                    <TextView
-                        android:layout_column="0"
-                        android:layout_margin="5dp"
-                        android:padding="3dip"
-                        android:text="Contacto:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/contactoT"
-                        android:layout_margin="5dp"
-                        android:padding="3dip"
-                        android:textColor="@color/app_color"
-                        android:textSize="18sp" />
-                </TableRow>
-
             </TableLayout>
 
             <LinearLayout

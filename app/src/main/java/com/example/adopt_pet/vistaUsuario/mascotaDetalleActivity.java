@@ -47,7 +47,6 @@ public class mascotaDetalleActivity extends AppCompatActivity {
     TextView tipoT;
     TextView edadT;
     TextView fechaT;
-    TextView contactoT;
     TextView mensajeEstado;
     TextView mensajeEstadoPen;
     ImageView whatsapp;
@@ -70,7 +69,7 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         builder.register();
 
         whatsapp.setOnClickListener(view -> {
-            String url = "https://api.whatsapp.com/send?phone=" + "+51" + data.getContacto() + "&text=" + data.getNombre();
+            String url = "https://api.whatsapp.com/send?phone=" + "+51" + data.getContacto();
             try {
                 PackageManager pm = getPackageManager();
                 pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
@@ -169,7 +168,6 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         tipoT.setText(data.getTipo());
         edadT.setText(data.getEdad());
         fechaT.setText(data.getFechaPublication());
-        contactoT.setText(data.getContacto());
 
         String soli = manager.getString(constants.SOLOCITUD_USUARIO);
 
@@ -202,7 +200,6 @@ public class mascotaDetalleActivity extends AppCompatActivity {
         tipoT = findViewById(R.id.tipoT);
         edadT = findViewById(R.id.edadT);
         fechaT = findViewById(R.id.fechaT);
-        contactoT = findViewById(R.id.contactoT);
         whatsapp = findViewById(R.id.whatsapp);
         llamada = findViewById(R.id.llamada);
         sendSolicitud = findViewById(R.id.sendSolicitud);

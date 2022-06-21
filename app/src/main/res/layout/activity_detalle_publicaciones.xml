@@ -182,6 +182,16 @@
                     android:textAllCaps="true"
                     android:textColor="#fff" />
 
+                <Button
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Eliminar Anuncio"
+                    android:textAllCaps="true"
+                    android:textColor="#EFE8E8" />
+
             </LinearLayout>
 
         </LinearLayout>

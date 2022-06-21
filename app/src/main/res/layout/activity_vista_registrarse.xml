@@ -136,12 +136,28 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RadioGroup
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbAccept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aceptar Términos y Condiciones" />
+
+                </RadioGroup>
+
                 <Button
                     android:id="@+id/registrar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
+                    android:enabled="false"
                     android:text="Registrarse"
                     android:textAllCaps="true"
                     android:textColor="#fff" />

@@ -25,7 +25,6 @@ public class DetalleAdopcionActivity extends AppCompatActivity {
     TextView nameS;
     TextView estadoS;
     TextView fechaS;
-    TextView nameU;
     TextView nuemroU;
     ImageView whatsapp;
     ImageView publication_image_s;
@@ -47,7 +46,7 @@ public class DetalleAdopcionActivity extends AppCompatActivity {
         getAdopcion();
 
         whatsapp.setOnClickListener(view -> {
-            String url = "https://api.whatsapp.com/send?phone=" + "+51" + adop.getNumero() + "&text=" + adop.getSolicitante();
+            String url = "https://api.whatsapp.com/send?phone=" + "+51" + adop.getNumero();
             try {
                 PackageManager pm = getPackageManager();
                 pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
@@ -94,8 +93,6 @@ public class DetalleAdopcionActivity extends AppCompatActivity {
             nameS.setText(adop.getNombre());
             estadoS.setText(adop.getInfo());
             fechaS.setText(adop.getFecha());
-
-            nameU.setText(adop.getSolicitante());
             nuemroU.setText(adop.getNumero());
 
             if (adop.getFoto() != null && !Objects.equals(adop.getFoto(), "")) {
@@ -123,12 +120,10 @@ public class DetalleAdopcionActivity extends AppCompatActivity {
         estadoS = findViewById(R.id.estadoS);
         fechaS = findViewById(R.id.fechaS);
         nameS = findViewById(R.id.nameS);
-        nameU = findViewById(R.id.nameU);
         nuemroU = findViewById(R.id.nuemroU);
         whatsapp = findViewById(R.id.whatsapp);
         llamada = findViewById(R.id.llamada);
         publication_image_s = findViewById(R.id.publication_image_s);
-
         messageShow = new MessageShow(getSupportFragmentManager());
         messageShow.init();
         db = FirebaseFirestore.getInstance();

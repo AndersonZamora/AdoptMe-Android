@@ -1,9 +1,10 @@
 package com.example.adopt_pet.vistaAdministrador;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,19 +12,23 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.ablanco.zoomy.TapListener;
 import com.ablanco.zoomy.Zoomy;
 import com.example.adopt_pet.R;
-import com.example.adopt_pet.autenticacion.VistaRegistrarseActivity;
+import com.example.adopt_pet.ayudantes.constants;
 import com.example.adopt_pet.ayudantes.listSpinner;
+import com.example.adopt_pet.ayudantes.preferenceManager;
 import com.example.adopt_pet.ayudantes.validaciones;
 import com.example.adopt_pet.models.mascota;
 import com.example.adopt_pet.mostrarMensajes.MessageShow;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.adopt_pet.vistaUsuario.mascotaDetalleActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -45,8 +50,10 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
     Zoomy.Builder builder;
     Spinner spinnerPri;
     Button update;
+    Button delete;
     validaciones mValidations;
     mascota data;
+    preferenceManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,61 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
         builder.register();
 
         update.setOnClickListener(view -> validate());
+
+        delete.setOnClickListener(view -> deletePublication());
+    }
+
+    void deletePublication() {
+
+        messageShow.showProgress();
+        db.collection("Solicitudes")
+                .whereEqualTo("mascotaID", uid)
+                .addSnapshotListener((value, error) -> {
+                    String usuarioID = "";
+                    if (error != null) {
+                        messageShow.dismissProgress();
+                    } else {
+                        messageShow.dismissProgress();
+                        assert value != null;
+                        for (QueryDocumentSnapshot doc : value) {
+                            usuarioID = doc.getId();
+                        }
+                        eliminar(usuarioID);
+                    }
+                });
+    }
+
+    void eliminar(String mascotaID) {
+
+        if (mascotaID != null && !mascotaID.equals("")) {
+            db.collection("Publicaciones").document(uid)
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        db.collection("Solicitudes").document(mascotaID).delete()
+                                .addOnSuccessListener(unused -> {
+                                    messageShow.dismissProgress();
+                                    Toast.makeText(DetallePublicacionesActivity.this, "Eliminado con éxito!", Toast.LENGTH_SHORT).show();
+                                    onBackPressed();
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        messageShow.dismissProgress();
+                        Toast.makeText(DetallePublicacionesActivity.this, "Error al eliminar la publicacion", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            db.collection("Publicaciones").document(uid)
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        messageShow.dismissProgress();
+                        Toast.makeText(DetallePublicacionesActivity.this, "Eliminado con éxito!", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                    })
+                    .addOnFailureListener(e -> {
+                        messageShow.dismissProgress();
+                        Toast.makeText(DetallePublicacionesActivity.this, "Error al eliminar la publicacion", Toast.LENGTH_SHORT).show();
+                    });
+        }
+
     }
 
     void validate() {
@@ -153,6 +215,12 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
 
         spinnerPri.setAdapter(mSpinnerPri);
 
+        if (data.getAdopcion().equals("no")) {
+            delete.setVisibility(View.VISIBLE);
+        } else if (data.getAdopcion().equals("si")) {
+            delete.setVisibility(View.GONE);
+        }
+
         messageShow.dismissProgress();
     }
 
@@ -173,6 +241,7 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
     }
 
     void init() {
+        manager = new preferenceManager(DetallePublicacionesActivity.this);
         nombreD = findViewById(R.id.nombreD);
         razaD = findViewById(R.id.razaD);
         edadD = findViewById(R.id.edadD);
@@ -189,5 +258,6 @@ public class DetallePublicacionesActivity extends AppCompatActivity {
         spinnerPri = findViewById(R.id.spinner_pri);
         mValidations = new validaciones(getApplicationContext());
         update = findViewById(R.id.update);
+        delete = findViewById(R.id.delete);
     }
 }
